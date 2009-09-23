@@ -1,0 +1,24 @@
+h1. GEMS:INSTALL!
+
+_Rails: A replacement for the useless Rake task gems:install that fails to install the gems 90% of the time._
+
+h2. How?
+
+Detecting gem details from your environment files, and installed using the RubyGems native install command.
+
+Together with the gem name, it also take these into account:
+
+* @:version@ (if specified)
+* @:source@ (if specified)
+
+*Just a note:* If this task fails (which I doubt in most cases) there's most probably something wrong with the project's gem configuration, or some gem library dependencies that fails to build.
+
+h2. Usage
+
+<pre>
+rake gems:install!
+</pre>
+
+h2. License
+
+Copyright (c) 2009 Jonas Grimfelt, released under the MIT-license.
