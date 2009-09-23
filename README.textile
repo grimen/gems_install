@@ -4,7 +4,7 @@ _Rails: A replacement for the useless Rake task gems:install that fails to insta
 
 h2. How?
 
-Detecting gem details from your environment files, and installed using the RubyGems native install command.
+Detecting gem details from your environment files, and install them using the RubyGems native install command.
 
 Together with the gem name, it also take these into account:
 
