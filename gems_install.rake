@@ -1,8 +1,13 @@
 namespace :gems do
   
+  # Uhm...don't want to load the environment, and considering this file
+  # is placed in: RAILS_ROOT/lib/tasks
+  #
+  RAILS_ROOT = File.join(File.dirname(__FILE__), *%w[.. ..])
+  
   ENV_GLOB_EXPRESSIONS = [
-      Rails.root.join('config', 'environment.rb'),
-      Rails.root.join("config", "environments", '*.rb')
+      File.join(RAILS_ROOT, 'config', 'environment.rb').to_s,
+      File.join(RAILS_ROOT, 'config', 'environments', '*.rb').to_s
     ]
   GEM_EXPRESSION = /^\s*config.gem\s+['"]([^'"]*)['"](.+:version\s*=>\s*['"]([^'"]*)['"])?(.+:source\s*=>\s*['"]([^'"]*)['"])?/
   
@@ -14,7 +19,7 @@ namespace :gems do
   #   $ rake gems:install!
   #
   desc "Like gems:install - but works."
-  task :install! => :environment do
+  task :install! do
     gems = {}
     
     puts "** Detecting gems..."
@@ -24,7 +29,7 @@ namespace :gems do
     
     # 2. Collect gem details (name and versions).
     env_files.each do |env_file|
-      puts Pathname.new(env_file).relative_path_from(Rails.root).to_s
+      puts Pathname.new(env_file).relative_path_from(RAILS_ROOT).to_s
       
       # Load file.
       config = File.read(env_file)
